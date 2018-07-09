@@ -16,10 +16,13 @@ def get(text,wfile,stag,etag,only=0,title='',line=''):
         for x in pat.finditer(text):
             lc = lc + text[cps:x.start()].count('\n')
             cps = x.start()
+            flag = False
             for y in x.group(1).split('\n'):
                 if len(y)==0:
                     continue
-                wfile.write(line+ y +'--'+str(lc) +'\n')
+                tail  = '\n' if flag else '--'+str(lc) +'\n' 
+                flag = True
+                wfile.write(line+ y +tail)
 
 def dealwith(fname,wname):
     print('dealing with '+fname)
