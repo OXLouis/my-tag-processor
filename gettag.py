@@ -7,10 +7,10 @@ def get(text,wfile,stag,etag,only=0,title='',line=''):
     if only:
         pat = re.compile(stag +'(.*?)' + etag)
         pos = re.search(pat,text)
-        wfile.write('## '+pos.group(1) +' ' + title+'\n\n')
+        wfile.write('\n## '+pos.group(1) +' ' + title+'\n\n')
     else:
         pat = re.compile(stag+'(.*?)'+etag,re.S)
-        wfile.write('### '+title+'\n\n')
+        wfile.write('\n### '+title+'\n\n')
         lc = 1
         cps = 0
         for x in pat.finditer(text):
