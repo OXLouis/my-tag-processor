@@ -7,7 +7,7 @@ def get(text,wfile,stag,etag,only=0,title='',line=''):
     if only:
         pat = re.compile(stag +'(.*?)' + etag)
         pos = re.search(pat,text)
-        wfile.write('## '+pos.group(1)+'\n\n')
+        wfile.write('## '+pos.group(1) +' ' + title+'\n\n')
     else:
         pat = re.compile(stag+'(.*?)'+etag,re.S)
         wfile.write('### '+title+'\n\n')
@@ -26,10 +26,11 @@ def get(text,wfile,stag,etag,only=0,title='',line=''):
 
 def dealwith(fname,wname):
     print('dealing with '+fname)
+    (filepath,filename) = os.path.split(fname)
     with open(wname,'a+') as w:
         with open(fname,'r') as f :
             txt = f.read()
-            get(txt,w,'\\ntitle: ','\\n',1,)
+            get(txt,w,'\\ntitle: ','\\n',1,'--'+filename)
             get(txt,w,'<tag>','</tag>',0,'重点摘抄','* ')
             get (txt,w,'<my>','</my>',0,'我的笔记','* ')
             get(txt,w,'<my note>','</my note>',0,'我的总结')
