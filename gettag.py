@@ -7,10 +7,10 @@ def get(text,wfile,stag,etag,only=0,title='',line=''):
     if only:
         pat = re.compile(stag +'(.*?)' + etag)
         pos = re.search(pat,text)
-        wfile.write('## '+pos.group(1)+'\n')
+        wfile.write('## '+pos.group(1)+'\n\n')
     else:
         pat = re.compile(stag+'(.*?)'+etag,re.S)
-        wfile.write('### '+title+'\n')
+        wfile.write('### '+title+'\n\n')
         lc = 1
         cps = 0
         for x in pat.finditer(text):
@@ -46,13 +46,11 @@ if __name__ =='__main__':
     if len(sys.argv) <= 1 or not os.path.exists(sys.argv[1]):
         pass
     else:
-        saveDir = ""
-        if len(sys.argv) <=2:
-            saveDir = os.getcwd()
+        saveDir = os.getcwd() if len(sys.argv) <=2 else sys.argv[2]
         sp = os.path.join(saveDir,'default.md') if os.path.isdir(saveDir) else saveDir
         all = 1 if len(sys.argv) > 3 else 0
-        with open(sp,'a') as w:
-            w.write('# js笔记\n')
+        with open(sp,'a+') as w:
+            w.write('# js笔记\n\n')
         dfs(sys.argv[1],sp,all)
 
 # 此脚本可以遍历文件夹下的指定类型文件，提取出md文件中stag和etag两种标记间的文本，以一定的格式加入新的md文件中

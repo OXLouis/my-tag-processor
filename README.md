@@ -10,6 +10,7 @@
 
 最终可以将my note 部分 提取出来，以简单格式插入新的markdown文件中
 用这个脚本生成的文件参考：[我的js学习笔记](https://gitlab.com/Oxlouis/my-learning-blog/blob/master/my_javascript_note.md)
+
 ### 调用方法
 
 调用方法: python gettag.py /提取文件路径/ [/存储文件路径/[文件名]] [all]
